@@ -43,6 +43,8 @@ $ ->
 
     form = tr.find(".form form")
     form.ajaxSubmit
+      error: (res) =>
+        alert(res.responseText)
       success: (value) =>
         if form.parent().hasClass("file")
           form.find(".inline-hints").html(value)

@@ -3,10 +3,12 @@ class ActiveadminSettings::SettingsController < ApplicationController
 
   def update
     @object = ActiveadminSettings::Setting.find(params[:id])
-    if @object.update_attributes(permitted_params[:setting])
-      render :text => @object.value
+    @object.assign_attributes(permitted_params[:setting])
+    if @object.valid?
+      @object.save!
+      render :plain => @object.value
     else
-      render :text => "error"
+      render :plain => @object.errors.full_messages.join(', '), status: 422
     end
   end
 
