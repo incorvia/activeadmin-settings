@@ -1,12 +1,18 @@
 class ActiveadminSettings::SettingsController < ApplicationController
-  before_action :authenticate_user!
+  unless ActiveAdmin.application.authentication_method.nil?
+    before_action ActiveAdmin.application.authentication_method
+  end
 
   def update
     @object = ActiveadminSettings::Setting.find(params[:id])
     @object.assign_attributes(permitted_params[:setting])
     if @object.valid?
       @object.save!
-      render :plain => @object.value
+      if @object.type == "file"
+        render partial: "admin/settings/form", locals: {setting: @object}
+      else
+        render :plain => @object.value
+      end
     else
       render :plain => @object.errors.full_messages.join(', '), status: 422
     end

@@ -1,7 +1,15 @@
 module ActiveadminSettings
   module SettingMethods
     def self.included(base)
-      base.mount_uploader  :file, ActiveadminSettings::SettingsFileUploader
+      if base.respond_to?(:mount_uploader)
+        base.mount_uploader  :file, ActiveadminSettings::SettingsFileUploader
+      elsif defined?(Paperclip)
+        base.has_attached_file(:file)
+        if base.respond_to?(:do_not_validate_attachment_file_type)
+          base.do_not_validate_attachment_file_type :file
+        end
+      end
+      
 
       # Validators
       base.validates_presence_of   :name

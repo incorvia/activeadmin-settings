@@ -2,3 +2,6 @@ en:
   activeadmin:
     settings:
       name: 'Settings'
+      save: 'Save'
+      saved: 'Saved'
+      editor: 'Show editor'

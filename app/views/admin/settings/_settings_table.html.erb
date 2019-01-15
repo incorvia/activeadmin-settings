@@ -1,3 +1,4 @@
+<% begin %>
 <table  border="0" cellspacing="0" cellpadding="0" id="settings" class="index_table index">
   <thead>
     <tr>
@@ -14,25 +15,7 @@
         <em><%= setting.description %></em>
       </td>
       <td>
-        <div class="form <%= setting.type %>">
-          <%= semantic_form_for setting, method: :put, url: "/admin/settings/#{setting.id}" do |f| %>
-            <%= f.inputs do %>
-              <% case setting.type %>
-              <% when 'file' %>
-                <%= f.input :file, hint: setting.value %>
-                <%= f.input :remove_file, as: :boolean %>
-              <% when 'text' %>
-                <li>
-                <%= text_area_tag 'setting[string]', setting.value, id: "setting#{setting.id}" %>
-                </li>
-              <% when 'boolean' %>
-                <%= f.input :string, as: :boolean, label: '' %>
-              <% else %>
-                <%= f.input :string, as: :string, placeholder: ("Default: #{setting.default_value}" unless setting.default_value.empty?)  %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
+        <%= render partial: "admin/settings/form", locals: {setting: setting} %>
       </td>
       <td>
         <a href="#" class="member_link update_link" data-id="#setting_<%= setting.id %>"><%= I18n.t('activeadmin.settings.save') %></a>
@@ -42,3 +25,9 @@
   <% end %>
   </tbody>
 </table>
+
+<% rescue Exception => e %>
+  <% puts e.class.name %>
+  <% puts e.message %>
+  <% puts e.backtrace.join("\n") %>
+<% end %>

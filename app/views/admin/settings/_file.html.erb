@@ -1,0 +1,15 @@
+<div class="form-file-field">
+<%= f.input :file, label: false %>
+<% if setting.file? %>
+  <div style="padding: 20px">
+  <% if setting.file.url.match(/\.(png|jpg|svg)/) %>
+    <%= image_tag(setting.file.url, style: "max-width: 300px; max-height: 120px") %>
+  <% elsif !setting.file.url.nil? %>
+    <%= link_to(setting.file.url, setting.file.url) %>
+  <% end %>
+  </div>
+<% end %>
+<% if setting.respond_to?(:remove_file) %>
+<%= f.input :remove_file, as: :boolean %>
+<% end %>
+</div>

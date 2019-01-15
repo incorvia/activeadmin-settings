@@ -47,8 +47,8 @@ $ ->
         alert(res.responseText)
       success: (value) =>
         if form.parent().hasClass("file")
-          form.find(".inline-hints").html(value)
-          form.clearForm()
+          form.find()
+          form.parent().html(value)
         if form.parent().hasClass("html")
           show_saved_state(btn)
         else

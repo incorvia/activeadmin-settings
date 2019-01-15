@@ -1,0 +1,19 @@
+<div class="form <%= setting.type %>">
+  <%= semantic_form_for setting, method: :put, url: "/admin/settings/#{setting.id}" do |f| %>
+    <%= f.inputs do %>
+      <% case setting.type %>
+      <% when 'file' %>
+        <%= render partial: "admin/settings/file", locals: {f: f, setting: setting} %>
+      <% when 'text' %>
+        <li>
+        <%= text_area_tag 'setting[string]', setting.value, id: "setting#{setting.id}" %>
+        </li>
+      <% when 'boolean' %>
+        <%= f.input :string, as: :boolean, label: '' %>
+      <% else %>
+        <%= f.input :string, as: :string, placeholder: ("Default: #{setting.default_value}" unless setting.default_value.empty?)  %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
