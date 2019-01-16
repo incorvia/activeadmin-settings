@@ -1,7 +1,7 @@
 module ActiveadminSettings
   module Helpers
-    def settings_value(name)
-      Setting[name]
+    def settings_value(name, method: :value, cache: true)
+      Setting.fetch(name, method, cache)
     end
 
     def settings_link_value(name, html_options={})

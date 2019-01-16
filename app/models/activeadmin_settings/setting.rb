@@ -88,10 +88,16 @@ module ActiveadminSettings
     class Setting < ActiveRecord::Base
       include SettingMethods
 
-      def self.[](name)
-        Rails.cache.fetch "setting_#{name}", expires_in: 5.minutes do
-          find_or_create_by(name: name).value
+      def self.fetch(name, method = :value, cache = true)
+        key = "setting_#{name}_#{method}"
+        Rails.cache.delete(key) unless cache
+        Rails.cache.fetch key, expires_in: 5.minutes do
+          find_or_create_by(name: name).send(method)
         end
+      end
+
+      def self.[](name)
+        self.fetch(name)
       end
 
       after_save do
