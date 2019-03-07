@@ -1,7 +1,7 @@
 module ActiveadminSettings
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      desc << "Description:\n    Copies source files to your application's app directory and required gems."
+      desc "Description:\n    Copies source files to your application's app directory and required gems."
 
       source_root File.expand_path('../templates', __FILE__)
 
