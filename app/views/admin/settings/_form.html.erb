@@ -8,6 +8,8 @@
         <li>
         <%= text_area_tag 'setting[string]', setting.value, id: "setting#{setting.id}" %>
         </li>
+      <% when 'select' %>
+        <%= f.input :string, as: :select, collection: setting.options %>
       <% when 'boolean' %>
         <%= f.input :string, as: :boolean, label: '' %>
       <% else %>
