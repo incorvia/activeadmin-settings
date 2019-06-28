@@ -23,7 +23,7 @@ module ActiveadminSettings
     module ClassMethods
       def initiate_setting(name)
         s = self.new(name: name)
-        s.string = s.default_value if s.type == 'text' or s.type == 'html'
+        s.string = s.default_value if %w[text html select].include? s.type
         s.save
         s
       end
@@ -46,6 +46,10 @@ module ActiveadminSettings
       val = (ActiveadminSettings.all_settings[name]['default_value'] ||= '').to_s
       val = ActionController::Base.helpers.asset_path(val) if type == 'file' and not val.include? '//'
       val
+    end
+
+    def options
+      ActiveadminSettings.all_settings[name]['options']
     end
 
     def value
