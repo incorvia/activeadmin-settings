@@ -27,8 +27,8 @@ module ActiveadminSettings
           puts "It doesn't look like you've installed activeadmin: active_admin.js is missing.\nPlease install it and try again."
         end
 
-        if File.exist?('app/assets/stylesheets/active_admin.css.scss')
-          insert_into_file  "app/assets/stylesheets/active_admin.css.scss",
+        if File.exist?('app/assets/stylesheets/active_admin.scss')
+          insert_into_file  "app/assets/stylesheets/active_admin.scss",
                             "//= require activeadmin_settings\n", :before => "// Active Admin CSS Styles\n"
         else
           puts "It doesn't look like you've installed activeadmin: active_admin.scss is missing.\nPlease install it and try again."

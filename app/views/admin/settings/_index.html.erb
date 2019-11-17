@@ -1,14 +1,14 @@
 <div id="settings_tabs">
-  <ul class="tabs table_tools_segmented_control">
+  <ul class="nav nav-tabs ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header" role="tablist">
     <% groups.each do |g| %>
       <li>
-        <a class="table_tools_button" href="#<%= g[:slug] %>"><%= g[:name] %></a>
+        <a href="#<%= g[:slug] %>"><%= g[:name] %></a>
       </li>
     <% end %>
   </ul>
 
   <% groups.each do |g| %>
-    <div id="<%= g[:slug] %>">
+    <div id="<%= g[:slug] %>" class="tab-content">
       <%= render :partial => "settings_table", :locals => {:settings => g[:settings]} %>
     </div>
   <% end %>

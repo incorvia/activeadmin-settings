@@ -3,7 +3,7 @@ module ActiveadminSettings
     isolate_namespace ActiveadminSettings
     initializer "helper" do |app|
       ActiveSupport.on_load(:action_controller) do
-        helper ActiveadminSettings::Helpers
+        include ActiveadminSettings::Helpers
       end
     end
   end
