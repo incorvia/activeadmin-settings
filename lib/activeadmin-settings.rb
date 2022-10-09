@@ -17,7 +17,7 @@ module ActiveadminSettings
     @load_config = {}
 
     config_file = ::Rails.root.join(@@config_file)
-    if File.exists?(config_file)
+    if File.exist?(config_file)
       @load_config = YAML::load(ERB.new(IO.read(config_file)).result) || {}
     end
 
