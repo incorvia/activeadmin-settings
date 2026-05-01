@@ -7,9 +7,19 @@
     <% end %>
   </ul>
 
-  <% groups.each do |g| %>
+  <% groups.each_with_index do |g, index| %>
     <div id="<%= g[:slug] %>" class="tab-content">
-      <%= render :partial => "settings_table", :locals => {:settings => g[:settings]} %>
+      <% if index.zero? %>
+        <%= render partial: "settings_table", locals: { settings: g[:settings] } %>
+      <% else %>
+        <div
+          class="settings-group-lazy"
+          data-group-slug="<%= g[:slug] %>"
+          data-src="/admin/settings/groups/<%= g[:slug] %>"
+        >
+          <em>Loading settings...</em>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -6,13 +6,13 @@ $ ->
   hide_update_btn = (el) ->
     $(el).closest('tr').find('.update_link').hide()
 
-  $('#settings .form form input, textarea').change ->
+  $(document).on 'change', '#settings .form form input, #settings .form form textarea', ->
     show_update_btn(this)
 
-  $('#settings .form form input, textarea').keypress ->
+  $(document).on 'keypress', '#settings .form form input, #settings .form form textarea', ->
     show_update_btn(this)
 
-  $('#settings .form form').submit ->
+  $(document).on 'submit', '#settings .form form', ->
     false
 
   show_saved_state = (el) ->
@@ -25,14 +25,14 @@ $ ->
       hide_label(saved_label, el)
     ), 1000
 
-  $('#settings .editor_link').click (e) ->
+  $(document).on 'click', '#settings .editor_link', (e) ->
     e.preventDefault()
     $(this).hide()
     $(this).closest('tr').find('.editor_remove_link').show()
     instance = $(this).closest('tr').find('textarea').attr('id')
     CKEDITOR.replace instance
 
-  $('#settings .update_link').click (e) ->
+  $(document).on 'click', '#settings .update_link', (e) ->
     e.preventDefault()
     btn = $(this)
     tr  = $(btn.attr("data-id"))
