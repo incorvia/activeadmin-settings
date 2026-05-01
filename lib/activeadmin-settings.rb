@@ -1,4 +1,5 @@
 require "activeadmin-settings/version"
+require "activeadmin-settings/settings_groups_builder"
 
 module ActiveadminSettings
   def self.table_name_prefix
